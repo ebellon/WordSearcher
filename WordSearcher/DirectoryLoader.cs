@@ -7,6 +7,10 @@ namespace WordSearcher
     {
         readonly IProvideFileSystem fileSystem;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DirectoryLoader"/> class.
+        /// </summary>
+        /// <param name="fileSystem">The file system.</param>
         public DirectoryLoader(IProvideFileSystem fileSystem)
         {
             this.fileSystem = fileSystem;

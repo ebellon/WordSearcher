@@ -10,6 +10,10 @@ namespace WordSearcher
         // TODO: make it a program argument
         const string dirToLoad = @"c:\tmp";
 
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
             Console.WriteLine("Word Searcher\r");
@@ -19,19 +23,32 @@ namespace WordSearcher
             using (var serviceProvider = ServicesProvider.SetupDI())
             {
                 // Load directory
-                var directoryLoader = serviceProvider.GetRequiredService<ILoadDirectories>();
-                var filesInDir = directoryLoader.GetFiles(dirToLoad);
+                var wordSearchManager = serviceProvider.GetRequiredService<IManageWordSearch>();
 
-                Console.WriteLine($"There are {filesInDir.Length} in {dirToLoad}");
-                Console.WriteLine("Press Q to exit");
-                Console.WriteLine();
+                try
+                {
+                    wordSearchManager.LoadDirectory(dirToLoad);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error loading directory {dirToLoad}: {ex.Message}");
+                }
 
                 // Search Logic here
-                do
+                while (true)
                 {
                     Console.Write("search>");
+                    var pattern = Console.ReadLine();
 
-                } while (Console.ReadLine() != "Q");
+                    try
+                    {
+                        wordSearchManager.SearchMatches(pattern);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error performing search {pattern} : {ex.Message}");
+                    }
+                }
             }
         }
     }

@@ -14,6 +14,8 @@ namespace WordSearcher.Common
             return new ServiceCollection()
              .AddSingleton<ILoadDirectories, DirectoryLoader>()
              .AddSingleton<IProvideFileSystem, PhysicalFileSystem>()
+             .AddSingleton<ISearchWords, WordSearcher>()
+             .AddSingleton<IManageWordSearch, WordSearchManager>()
              .BuildServiceProvider();
         }
     }
