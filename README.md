@@ -1,5 +1,8 @@
 # WordSearcher
-A wonderful word searcher tool
+A wonderful word search tool.
+Usage 
+
+    WordSearcher.exe 'Directory to search'
 
 Download and build it in VS2019 
  - Framework .Net Core 3.1
