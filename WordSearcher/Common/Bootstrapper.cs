@@ -1,15 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics.CodeAnalysis;
 using WordSearcher.Interfaces;
 
 namespace WordSearcher.Common
 {
-    internal static class ServicesProvider
+    [ExcludeFromCodeCoverage]
+    internal static class Bootstrapper
     {
         /// <summary>
         /// Setups the Dependency injection.
         /// </summary>
         /// <returns>ServiceProvider</returns>
-        public static ServiceProvider SetupDI()
+        public static ServiceProvider Setup()
         {
             return new ServiceCollection()
              .AddSingleton<ILoadDirectories, DirectoryLoader>()

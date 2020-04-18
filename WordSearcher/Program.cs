@@ -6,7 +6,7 @@ using WordSearcher.Interfaces;
 
 namespace WordSearcher
 {
-    public class Program 
+    static class Program 
     {
         /// <summary>
         /// Defines the entry point of the application.
@@ -14,18 +14,19 @@ namespace WordSearcher
         /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
-            Console.WriteLine("Word Searcher\r");
-            Console.WriteLine("------------------------\n");
+            Console.WriteLine("Word Searcher");
+            Console.WriteLine("------------------------");
 
-            var dirToLoad = @"c:\tmp";
             if(args.Length != 1)
             {
                 Console.WriteLine("Path not provided! Usage: WordSearcher.exe 'Folder' ");
                 Environment.Exit(-1);
             }
 
+           string dirToLoad = args[0];
+
             // Setup dependency injection
-            using (var serviceProvider = ServicesProvider.SetupDI())
+            using (var serviceProvider = Bootstrapper.Setup())
             {
                 // Load directory
                 var wordSearchManager = serviceProvider.GetRequiredService<IManageWordSearch>();
