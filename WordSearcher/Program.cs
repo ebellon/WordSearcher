@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Runtime.CompilerServices;
 using WordSearcher.Common;
 using WordSearcher.Interfaces;
 
@@ -24,11 +25,13 @@ namespace WordSearcher
 
                 Console.WriteLine($"There are {filesInDir.Length} in {dirToLoad}");
                 Console.WriteLine("Press Q to exit");
+                Console.WriteLine();
 
                 // Search Logic here
                 do
                 {
                     Console.Write("search>");
+
                 } while (Console.ReadLine() != "Q");
             }
         }

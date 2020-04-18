@@ -1,4 +1,7 @@
-﻿namespace WordSearcher.Interfaces
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("WordSearcher.ClassTests")]
+namespace WordSearcher.Interfaces
 {
     internal interface ILoadDirectories
     {

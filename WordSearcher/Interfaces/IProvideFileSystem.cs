@@ -1,4 +1,7 @@
-﻿namespace WordSearcher.Interfaces
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")] // needed for Moq testing
+namespace WordSearcher.Interfaces
 {
     internal interface IProvideFileSystem
     {
