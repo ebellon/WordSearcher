@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 using WordSearcher.Common;
 using WordSearcher.Interfaces;
 
@@ -7,9 +8,6 @@ namespace WordSearcher
 {
     public class Program 
     {
-        // TODO: make it a program argument
-        const string dirToLoad = @"c:\tmp";
-
         /// <summary>
         /// Defines the entry point of the application.
         /// </summary>
@@ -19,6 +17,13 @@ namespace WordSearcher
             Console.WriteLine("Word Searcher\r");
             Console.WriteLine("------------------------\n");
 
+            var dirToLoad = @"c:\tmp";
+            if(args.Length != 1)
+            {
+                Console.WriteLine("Path not provided! Usage: WordSearcher.exe 'Folder' ");
+                Environment.Exit(-1);
+            }
+
             // Setup dependency injection
             using (var serviceProvider = ServicesProvider.SetupDI())
             {
@@ -27,11 +32,13 @@ namespace WordSearcher
 
                 try
                 {
-                    wordSearchManager.LoadDirectory(dirToLoad);
+                    var fileNumber = wordSearchManager.LoadDirectory(dirToLoad);
+                    Console.WriteLine($"There are {fileNumber} in {dirToLoad}");
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error loading directory {dirToLoad}: {ex.Message}");
+                    Environment.Exit(-1);
                 }
 
                 // Search Logic here
@@ -42,11 +49,13 @@ namespace WordSearcher
 
                     try
                     {
-                        wordSearchManager.SearchMatches(pattern);
+                        var topTen = wordSearchManager.SearchMatches(pattern);
+                        topTen.ToList().ForEach((kvp) => Console.WriteLine($"file {kvp.Key} : {kvp.Value} ocurrences"));
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"Error performing search {pattern} : {ex.Message}");
+                        Environment.Exit(-1);
                     }
                 }
             }

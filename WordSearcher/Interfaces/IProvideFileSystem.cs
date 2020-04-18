@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("WordSearcher.UnitTests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")] // needed for Moq testing
 namespace WordSearcher.Interfaces
 {

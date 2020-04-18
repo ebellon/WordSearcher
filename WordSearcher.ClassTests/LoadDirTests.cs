@@ -1,8 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WordSearcher.ClassTests.Common;
+using System.Diagnostics.CodeAnalysis;
+using WordSearcher.UnitTests.Common;
 
-namespace WordSearcher.ClassTests
+namespace WordSearcher.UnitTests
 {
+    [ExcludeFromCodeCoverage]
     [TestClass]
     public class LoadDirTests
     {
@@ -12,14 +14,14 @@ namespace WordSearcher.ClassTests
         [TestMethod]
         public void LoadDirTestNumberOfFiles(int expectedFiles)
         {
-            //arrange
+            // Arrange
             var fileSystem = TestUtils.FileSystemBuilder(expectedFiles);
             var testee = new DirectoryLoader(fileSystem);
 
-            //act
+            // Act
             var actualFiles = testee.GetFiles("testDir").Length;
 
-            //assess
+            // Assess
             Assert.AreEqual(expectedFiles, actualFiles);
         }
     }

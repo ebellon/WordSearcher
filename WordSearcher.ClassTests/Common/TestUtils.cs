@@ -1,12 +1,11 @@
 ﻿using Moq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using WordSearcher.Interfaces;
 
-namespace WordSearcher.ClassTests.Common
+namespace WordSearcher.UnitTests.Common
 {
     internal static class TestUtils
     {
@@ -49,10 +48,6 @@ namespace WordSearcher.ClassTests.Common
                 var randomPosition = RandomNumberGenerator.GetInt32(textFileLenght);
                 randomString = randomString.Insert(randomPosition, pattern);
             }
-
-            //TODO: remove, only for testing
-            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
-            Trace.WriteLine(randomString);
 
             return randomString;
         }

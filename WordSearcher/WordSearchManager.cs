@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WordSearcher.Interfaces;
@@ -26,18 +25,17 @@ namespace WordSearcher
         }
 
         /// <inheritdoc/>
-        public void LoadDirectory(string path)
+        public int LoadDirectory(string path)
         {
             filesToSearch = this.directoriesLoader.GetFiles(path).ToList();
-            Console.WriteLine($"There are {filesToSearch.Count} in {path}");
+            return filesToSearch.Count;
         }
 
         /// <inheritdoc/>
-        public void SearchMatches(string pattern)
+        public IDictionary<string, int> SearchMatches(string pattern)
         {
             var matchesResult = new ConcurrentDictionary<string, int>();
 
-            var stopWatch = Stopwatch.StartNew();
             Parallel.ForEach(filesToSearch, (currentFile) =>
             {
                 var matches = this.wordSearcher.SearchWordsInFile(currentFile, pattern);
@@ -47,16 +45,10 @@ namespace WordSearcher
                     _ = matchesResult.TryAdd(currentFile, matches);
                 }
             });
-            stopWatch.Stop();
 
-            Console.WriteLine($"Search in {filesToSearch.Count} files took {stopWatch.ElapsedMilliseconds} ms"); 
-
-            var topTen = (from a in matchesResult
+            return (from a in matchesResult
                           orderby a.Value descending
-                          select a).Take(10);
-
-            topTen.ToList().ForEach((kvp) => Console.WriteLine($"file {kvp.Key} : {kvp.Value} ocurrences"));
-
+                          select a).Take(10).ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }

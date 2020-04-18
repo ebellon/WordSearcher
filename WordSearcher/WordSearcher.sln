@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearcher", "WordSearcher.csproj", "{63C89C19-5DDF-4739-8415-2512628671CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearcher.ClassTests", "..\WordSearcher.ClassTests\WordSearcher.ClassTests.csproj", "{62499AAE-8012-42CC-A14F-C174D552C398}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearcher.UnitTests", "..\WordSearcher.ClassTests\WordSearcher.UnitTests.csproj", "{62499AAE-8012-42CC-A14F-C174D552C398}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
