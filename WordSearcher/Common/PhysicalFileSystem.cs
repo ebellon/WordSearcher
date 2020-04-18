@@ -10,5 +10,11 @@ namespace WordSearcher
         {
             return Directory.GetFiles(path);
         }
+
+        /// <inheritdoc/>
+        public string ReadAllText(string path)
+        {
+            return File.ReadAllText(path);
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Runtime.CompilerServices;
 using WordSearcher.Common;
 using WordSearcher.Interfaces;
 

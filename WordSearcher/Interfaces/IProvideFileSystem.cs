@@ -9,7 +9,13 @@ namespace WordSearcher.Interfaces
         /// Gets the files.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <returns></returns>
         string[] GetFiles(string path);
+
+
+        /// <summary>
+        /// Reads all text.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        string ReadAllText(string path);
     }
 }

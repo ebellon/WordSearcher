@@ -1,7 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using WordSearcher.Interfaces;
 
-[assembly: InternalsVisibleTo("ClassTests")]
 namespace WordSearcher
 {
     internal class DirectoryLoader : ILoadDirectories
