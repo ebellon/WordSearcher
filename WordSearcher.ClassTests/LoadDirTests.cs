@@ -13,16 +13,14 @@ namespace WordSearcher.ClassTests
         public void LoadDirTestNumberOfFiles(int expectedFiles)
         {
             //arrange
-            int expectedfiles = expectedFiles;
-            var fileSystem = TestUtils.FileSystemBuilder(expectedfiles);
-
+            var fileSystem = TestUtils.FileSystemBuilder(expectedFiles);
             var testee = new DirectoryLoader(fileSystem);
 
             //act
-            var actualFiles = testee.GetFiles("testDir0").Length;
+            var actualFiles = testee.GetFiles("testDir").Length;
 
             //assess
-            Assert.AreEqual(expectedfiles, actualFiles);
+            Assert.AreEqual(expectedFiles, actualFiles);
         }
     }
 }

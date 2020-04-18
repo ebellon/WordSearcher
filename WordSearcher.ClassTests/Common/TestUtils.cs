@@ -1,5 +1,7 @@
 ﻿using Moq;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using WordSearcher.Interfaces;
@@ -8,6 +10,8 @@ namespace WordSearcher.ClassTests.Common
 {
     internal static class TestUtils
     {
+        private const int textFileLenght = 10000;
+
         public static IProvideFileSystem FileSystemBuilder(int numberOfFiles)
         {
             return FileSystemBuilder(numberOfFiles, string.Empty, 0);
@@ -22,7 +26,7 @@ namespace WordSearcher.ClassTests.Common
             return fileSystem.Object;
         }
 
-        public static string[] FileGenerator(int numberOfFiles)
+        private static string[] FileGenerator(int numberOfFiles)
         {
             var result = new List<string>();
             for (int i = 0; i < numberOfFiles; i++)
@@ -33,18 +37,22 @@ namespace WordSearcher.ClassTests.Common
             return result.ToArray();
         }
 
-        public static string GenerateStringWithPattern(string pattern, int numberOfPatterns)
+        private static string GenerateStringWithPattern(string pattern, int numberOfPatterns)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-            var randomString = new string(Enumerable.Repeat(chars, 1000)
+            var randomString = new string(Enumerable.Repeat(chars, textFileLenght)
               .Select(s => s[RandomNumberGenerator.GetInt32(s.Length)]).ToArray());
 
             for (int i = 0; i < numberOfPatterns; i++)
             {
-                var randomPosition = RandomNumberGenerator.GetInt32(1000);
+                var randomPosition = RandomNumberGenerator.GetInt32(textFileLenght);
                 randomString = randomString.Insert(randomPosition, pattern);
             }
+
+            //TODO: remove, only for testing
+            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            Trace.WriteLine(randomString);
 
             return randomString;
         }

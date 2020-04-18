@@ -6,17 +6,18 @@ namespace WordSearcher.ClassTests
     [TestClass]
     public class WordSearchTests
     {
+        [DataRow("testWord", 2)]
+        [DataRow("ABCDEFG", 5)]
+        [DataRow("WXYZ22", 20)]
         [TestMethod]
-        public void WordSearchTest()
+        public void WordSearchTest(string pattern, int expectedMatches)
         {
-            int expectedMatches = 2;
-
             //arrange
-            var fileSystem = TestUtils.FileSystemBuilder(1, "testWord", expectedMatches);
+            var fileSystem = TestUtils.FileSystemBuilder(1, pattern, expectedMatches);
             var testee = new WordSearcher(fileSystem);
 
             //act
-            var actualMatches = testee.SearchWordsInFile("testFile", "testWord");
+            var actualMatches = testee.SearchWordsInFile("testFile", pattern);
 
             //assess
             Assert.AreEqual(expectedMatches, actualMatches);
